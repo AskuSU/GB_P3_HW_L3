@@ -1,9 +1,8 @@
 ﻿#include <windows.h>
-
 #include "MyLib.h"
 
 #include "List_Ext.h"
-//#include "Task2.h"
+#include "Matrix.h"
 //#include "Task3.h"
 
 
@@ -21,7 +20,12 @@ void Task1()
 
 void Task2()
 {
-	
+	std::cout << "Работа с Классом Matrix:" << std::endl << std::endl;
+	std::cout << "Введите размер матрицы: ";
+	size_t size;
+	std::cin >> size;
+	Matrix mtrx(size, std::cin);
+	mtrx.print();
 }
 
 
