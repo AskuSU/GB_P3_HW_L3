@@ -29,6 +29,7 @@ Matrix::Matrix(std::istream& stream)
 			}
 		}
 	}
+	myLib::clearStream(stream);
 }
 
 void Matrix::print()

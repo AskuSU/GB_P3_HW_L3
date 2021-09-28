@@ -46,6 +46,12 @@ namespace myLib
 		return taskNumber;
 	}
 
+	void clearStream(std::istream& stream)
+	{
+		stream.clear();
+		stream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+
 	void printArr(size_t size, bool NeedCnt, unsigned short* Arr)
 	{
 		if (NeedCnt) std::cout << "Кол-во элементов = " << size << std::endl;

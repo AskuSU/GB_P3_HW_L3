@@ -13,6 +13,7 @@ namespace myLib
 	std::string getUserInputTxt();
 	char getUserInputKey();
 	unsigned short getUserSelectedTask(unsigned short qtyTask);
+	void clearStream(std::istream& stream);
 
 	template <typename T>
 	void printArr(size_t size, T* Arr);
