@@ -31,9 +31,6 @@ void Matrix::calculate()
 		for (size_t i = 0; i < size; i++)
 		{
 			minors.push_back(Matrix(*this, i));
-		}
-		for (size_t i = 0; i < size; i++)
-		{
 			determinant.emplace() = determinant.value() + matrix[0][i] * minors[i].determinant.value() * (i % 2 == 0 ? 1 : (-1));
 		}
 		break;
