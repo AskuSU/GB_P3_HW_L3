@@ -23,7 +23,8 @@ void Task2()
 	std::cout << "Работа с Классом Matrix:" << std::endl << std::endl;
 	Matrix mtrx(std::cin);
 	std::cout << std::endl;
-	mtrx.print();
+	mtrx.printMatrix();
+	mtrx.printAnswer();
 }
 
 

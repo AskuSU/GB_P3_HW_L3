@@ -1,8 +1,48 @@
-#include "Matrix.h"
+﻿#include "Matrix.h"
 
-Matrix::Matrix(std::istream& stream)
+Matrix::Matrix(const Matrix& prevMatrix, const size_t& expansion_string_element_index) : determinant(std::nullopt), size(prevMatrix.size - 1)
 {
-	std::cout << "������� ������ �������: ";
+	matrix.reserve(size);
+	for (size_t i = 0; i < size; i++)
+	{
+		matrix.push_back(std::vector<int32_t>());
+		matrix[i].reserve(size);
+		for (size_t j = 0; j < prevMatrix.size; j++)
+		{
+			if (expansion_string_element_index != j) matrix[i].push_back(prevMatrix.matrix[i + 1][j]);
+		}
+	}
+	calculate();
+}
+
+void Matrix::calculate()
+{
+	switch (size)
+	{
+	case 1:
+		determinant = matrix[0][0];
+		break;
+	case 2:
+		determinant = matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
+		break;
+	default:
+		minors.reserve(size);
+		determinant = 0;
+		for (size_t i = 0; i < size; i++)
+		{
+			minors.push_back(Matrix(*this, i));
+		}
+		for (size_t i = 0; i < size; i++)
+		{
+			determinant.emplace() = determinant.value() + matrix[0][i] * minors[i].determinant.value() * (i % 2 == 0 ? 1 : (-1));
+		}
+		break;
+	}
+}
+
+Matrix::Matrix(std::istream& stream) : determinant(std::nullopt)
+{
+	std::cout << "Введите размер матрицы: ";
 	size = myLib::getUserInput<int32_t>(std::cin).value_or(0);
 
 	matrix.reserve(size);
@@ -30,9 +70,10 @@ Matrix::Matrix(std::istream& stream)
 		}
 	}
 	myLib::clearStream(stream);
+	calculate();
 }
 
-void Matrix::print()
+void Matrix::printMatrix()
 {
 	for (const auto& i : matrix)
 	{
@@ -42,4 +83,11 @@ void Matrix::print()
 		}
 		std::cout << std::endl;
 	}		
+}
+
+void Matrix::printAnswer()
+{
+	if (determinant) std::cout << "Определитель матрицы = " << determinant.value();
+	else std::cout << "Определитель не найден";
+	std::cout << std::endl;
 }
