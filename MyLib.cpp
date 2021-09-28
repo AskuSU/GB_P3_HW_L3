@@ -7,17 +7,17 @@ namespace myLib
 		while (true)
 		{
 			std::string input;
-			cin >> input;
-			if (cin.fail())
+			std::cin >> input;
+			if (std::cin.fail())
 			{
-				cout << "Ошибка ввода, повторите ввод: ";
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				std::cout << "Ошибка ввода, повторите ввод: ";
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
 			else
 			{
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				return input;
 			}
 		}
@@ -26,9 +26,9 @@ namespace myLib
 	char getUserInputKey()
 	{
 		char c;
-		cin.get(c);
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		std::cin.get(c);
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		return c;
 	}
 
@@ -37,63 +37,63 @@ namespace myLib
 		unsigned short taskNumber = 0;
 		do
 		{
-			cout << "Введите номер задачи от 1 до " << qtyTask << ":" << endl;
-			taskNumber = getUserInput<int>(false);
+			std::cout << "Введите номер задачи от 1 до " << qtyTask << ":" << std::endl;
+			taskNumber = getUserInput<int>(std::cin, false).value_or(0);
 		} while (taskNumber > qtyTask || taskNumber < 1);
 
-		cout << endl;
+		std::cout << std::endl;
 
 		return taskNumber;
 	}
 
 	void printArr(size_t size, bool NeedCnt, unsigned short* Arr)
 	{
-		if (NeedCnt) cout << "Кол-во элементов = " << size << endl;
+		if (NeedCnt) std::cout << "Кол-во элементов = " << size << std::endl;
 		for (size_t i = 0; i < size; i++)
 		{
-			cout << Arr[i] << ' ';
+			std::cout << Arr[i] << ' ';
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void printArr(size_t size, bool NeedCnt, int* Arr)
 	{
-		if (NeedCnt) cout << "Кол-во элементов = " << size << endl;
+		if (NeedCnt) std::cout << "Кол-во элементов = " << size << std::endl;
 		for (size_t i = 0; i < size; i++)
 		{
-			cout << Arr[i] << ' ';
+			std::cout << Arr[i] << ' ';
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void printArr(size_t size, bool NeedCnt, int* Arr, size_t medianPos)
 	{
-		if (NeedCnt) cout << "Кол-во элементов = " << size << endl;
+		if (NeedCnt) std::cout << "Кол-во элементов = " << size << std::endl;
 		for (size_t i = 0; i < size; i++)
 		{
-			if (medianPos > 0 && medianPos == i) cout << "|| ";
-			cout << Arr[i] << ' ';
+			if (medianPos > 0 && medianPos == i) std::cout << "|| ";
+			std::cout << Arr[i] << ' ';
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 
-	string getNameFileFromUser(unsigned short indexF)
+	std::string getNameFileFromUser(unsigned short indexF)
 	{
-		cout << "Введите имя";
+		std::cout << "Введите имя";
 		switch (indexF)
 		{
 		case 0:
 			break;
 		case 100:
-			cout << " Конечного";
+			std::cout << " Конечного";
 			break;
 		default:
-			cout << " " << indexF << "го";
+			std::cout << " " << indexF << "го";
 			break;
 		}
-		cout << " файла(без расширения): ";
-		string s;
-		cin >> s;
+		std::cout << " файла(без расширения): ";
+		std::string s;
+		std::cin >> s;
 
 		return s;
 	}

@@ -21,10 +21,8 @@ void Task1()
 void Task2()
 {
 	std::cout << "Работа с Классом Matrix:" << std::endl << std::endl;
-	std::cout << "Введите размер матрицы: ";
-	size_t size;
-	std::cin >> size;
-	Matrix mtrx(size, std::cin);
+	Matrix mtrx(std::cin);
+	std::cout << std::endl;
 	mtrx.print();
 }
 
@@ -55,7 +53,7 @@ int main()
 		case 3: Task3();
 			break;
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 
     return 0;
