@@ -3,7 +3,7 @@
 
 #include "List_Ext.h"
 #include "Matrix.h"
-//#include "Task3.h"
+#include "Range.h"
 
 
 void Task1()
@@ -30,7 +30,13 @@ void Task2()
 
 void Task3()
 {	
-	
+	std::cout << "Работа с Классом Range:" << std::endl << std::endl;
+	for (const auto& i : Range<int32_t>(10, 20))
+		std::cout << i << " ";
+	std::cout << std::endl;
+	for (const auto& i : Range<float_t>(5, 15, 0.5f))
+		std::cout << i << " ";
+	std::cout << std::endl;
 }
 
 

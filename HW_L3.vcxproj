@@ -145,6 +145,7 @@
     <ClCompile Include="MyLib.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Range.h" />
     <ClInclude Include="List_Ext.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MyLib.h" />
