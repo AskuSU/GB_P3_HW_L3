@@ -1,7 +1,46 @@
 #pragma once
 
 template<typename T>
-class RangeIterator sealed;
+class RangeIterator sealed
+{
+public:
+	typedef T RangeType;
+	typedef RangeIterator<RangeType> SelfType;
+	typedef typename RangeType::ValueType ValueType;
+
+private:
+	const RangeType* const m_range;
+	ValueType m_value;
+
+public:
+	RangeIterator(const RangeType* const range, ValueType startValue)
+		: m_range(range), m_value(startValue)
+	{};
+
+	operator ValueType() const
+	{
+		return m_value;
+	}
+	ValueType operator*() const
+	{
+		return m_value;
+	}
+	SelfType& operator++()
+	{
+		m_value += m_range->step();
+		return *this;
+	}
+	SelfType operator++(int)
+	{
+		SelfType tempIt(*this);
+		++(*this);
+		return tempIt;
+	}
+	bool operator!= (const SelfType& right)
+	{
+		return !(*this == right);
+	}
+};
 
 template <typename T>
 class Range
@@ -37,47 +76,5 @@ public:
 	RangeIterator<Range<T>> end()
 	{
 		return RangeIterator<Range<T>>(this, m_min + size() * m_step);
-	}
-};
-
-template<typename T>
-class RangeIterator sealed
-{
-public:
-	typedef T RangeType;
-	typedef RangeIterator<RangeType> SelfType;
-	typedef typename RangeType::ValueType ValueType;
-
-private:
-	const RangeType* const m_range;
-	ValueType m_value;
-
-public:
-	RangeIterator(const RangeType* const range, ValueType startValue)
-		: m_range(range), m_value(startValue)
-	{};
-
-	operator ValueType() const
-	{
-		return m_value;
-	}
-	ValueType operator*() const 
-	{
-		return m_value;
-	}
-	SelfType& operator++()
-	{
-		m_value += m_range->step();
-		return *this;
-	}
-	SelfType operator++(int)
-	{
-		SelfType tempIt(*this);
-		++(*this);
-		return tempIt;
-	}
-	bool operator!= (const SelfType& right)
-	{
-		return !(*this == right);
 	}
 };
